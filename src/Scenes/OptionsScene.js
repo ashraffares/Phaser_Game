@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import bluebutton1 from '../assets/ui/blue_button02.png';
 
 export default class OptionsScene extends Phaser.Scene {
   constructor() {
@@ -30,7 +31,7 @@ export default class OptionsScene extends Phaser.Scene {
 
     this.updateAudio();
 
-    this.menuButton = this.add.sprite(400, 500, 'blueButton1').setInteractive();
+    this.menuButton = this.add.sprite(400, 500, bluebutton1).setInteractive();
     this.menuText = this.add.text(0, 0, 'Menu', { fontSize: '32px', fill: '#fff' });
     Phaser.Display.Align.In.Center(this.menuText, this.menuButton);
 
