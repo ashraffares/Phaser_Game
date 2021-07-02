@@ -6,9 +6,6 @@ export default class TitleScene extends Phaser.Scene {
     super('Title');
   }
 
-  preload() {
-  }
-
   create() {
     // Game
     this.gameButton = this.add.sprite(100, 200, 'blueButton1').setInteractive();
@@ -17,7 +14,7 @@ export default class TitleScene extends Phaser.Scene {
     this.gameText = this.add.text(0, 0, 'Play', { fontSize: '32px', fill: '#fff' });
     this.centerButtonText(this.gameText, this.gameButton);
 
-    this.gameButton.on('pointerdown', (pointer) => {
+    this.gameButton.on('pointerdown', () => {
       this.scene.start('Game');
     });
 
@@ -28,7 +25,7 @@ export default class TitleScene extends Phaser.Scene {
     this.optionsText = this.add.text(0, 0, 'Options', { fontSize: '32px', fill: '#fff' });
     this.centerButtonText(this.optionsText, this.optionsButton);
 
-    this.optionsButton.on('pointerdown', (pointer) => {
+    this.optionsButton.on('pointerdown', () => {
       this.scene.start('Options');
     });
 
@@ -39,7 +36,7 @@ export default class TitleScene extends Phaser.Scene {
     this.creditsText = this.add.text(0, 0, 'Credits', { fontSize: '32px', fill: '#fff' });
     this.centerButtonText(this.creditsText, this.creditsButton);
 
-    this.creditsButton.on('pointerdown', (pointer) => {
+    this.creditsButton.on('pointerdown', () => {
       this.scene.start('Credits');
     });
 
