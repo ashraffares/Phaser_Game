@@ -1,11 +1,8 @@
-import 'phaser';
+import Phaser from 'phaser';
 
 export default class OptionsScene extends Phaser.Scene {
   constructor() {
     super('Options');
-  }
-
-  preload() {
   }
 
   create() {
@@ -22,12 +19,12 @@ export default class OptionsScene extends Phaser.Scene {
     this.soundButton.setInteractive();
 
     this.musicButton.on('pointerdown', () => {
-      this.musicOn = !this.musicOn;
+      this.model.musicOn = !this.model.musicOn;
       this.updateAudio();
     });
 
     this.soundButton.on('pointerdown', () => {
-      this.soundOn = !this.soundOn;
+      this.model.soundOn = !this.model.soundOn;
       this.updateAudio();
     });
 
@@ -37,19 +34,19 @@ export default class OptionsScene extends Phaser.Scene {
     this.menuText = this.add.text(0, 0, 'Menu', { fontSize: '32px', fill: '#fff' });
     Phaser.Display.Align.In.Center(this.menuText, this.menuButton);
 
-    this.menuButton.on('pointerdown', (pointer) => {
+    this.menuButton.on('pointerdown', () => {
       this.scene.start('Title');
     });
   }
 
   updateAudio() {
-    if (this.musicOn === false) {
+    if (this.model.musicOn === false) {
       this.musicButton.setTexture('box');
     } else {
       this.musicButton.setTexture('checkedBox');
     }
 
-    if (this.soundOn === false) {
+    if (this.model.soundOn === false) {
       this.soundButton.setTexture('box');
     } else {
       this.soundButton.setTexture('checkedBox');
