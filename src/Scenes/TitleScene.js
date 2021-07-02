@@ -21,14 +21,6 @@ export default class TitleScene extends Phaser.Scene {
       this.scene.start('Game');
     });
 
-    this.input.on('pointerover', (event, gameObjects) => {
-      gameObjects[0].setTexture('blueButton2');
-    });
-
-    this.input.on('pointerout', (event, gameObjects) => {
-      gameObjects[0].setTexture('blueButton1');
-    });
-
     // Options
     this.optionsButton = this.add.sprite(300, 200, 'blueButton1').setInteractive();
     this.centerButton(this.optionsButton);
