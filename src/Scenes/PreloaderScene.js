@@ -80,6 +80,17 @@ export default class PreloaderScene extends Phaser.Scene {
     this.load.image('phaserLogo', 'assets/logo.png');
   }
 
+  init() {
+    this.readyCount = 0;
+  }
+
+  ready() {
+    this.readyCount += 1;
+    if (this.readyCount === 2) {
+      this.scene.start('Title');
+    }
+  }
+
   create() {
   }
 }
