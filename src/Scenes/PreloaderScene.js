@@ -48,6 +48,19 @@ export default class PreloaderScene extends Phaser.Scene {
       },
     });
     assetText.setOrigin(0.5, 0.5);
+
+    // update progress bar
+    this.load.on('progress', (value) => {
+      percentText.setText(`${parseInt(value * 100)}%`);
+      progressBar.clear();
+      progressBar.fillStyle(0xffffff, 1);
+      progressBar.fillRect(250, 280, 300 * value, 30);
+    });
+
+    // update file progress text
+    this.load.on('fileprogress', (file) => {
+      assetText.setText(`Loading asset: ${file.key}`);
+    });
   }
 
   create() {
