@@ -4,6 +4,7 @@ import blueButton2 from '../assets/ui/blue_button03.png';
 import phaserLogo from '../assets/logo.png';
 import box from '../assets/ui/grey_box.png';
 import checkedBox from '../assets/ui/blue_boxCheckmark.png';
+import bgMusic from '../assets/TownTheme.mp3';
 
 export default class PreloaderScene extends Phaser.Scene {
   constructor() {
@@ -56,7 +57,9 @@ export default class PreloaderScene extends Phaser.Scene {
 
     // update progress bar
     this.load.on('progress', (value) => {
+      /* eslint-disable */ 
       percentText.setText(`${parseInt(value * 100)}%`);
+      /* eslint-enable */
       progressBar.clear();
       progressBar.fillStyle(0xffffff, 1);
       progressBar.fillRect(250, 280, 300 * value, 30);
@@ -85,7 +88,7 @@ export default class PreloaderScene extends Phaser.Scene {
     this.load.image('phaserLogo', phaserLogo);
     this.load.image('box', box);
     this.load.image('checkedBox', checkedBox);
-    this.load.audio('bgMusic', ['../assets/TownTheme.mp3']);
+    this.load.audio('bgMusic', [bgMusic]);
   }
 
   init() {

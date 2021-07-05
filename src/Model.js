@@ -1,3 +1,4 @@
+/* eslint-disable */ 
 export default class Model {
   constructor() {
     this._soundOn = true;

@@ -1,13 +1,9 @@
 import Phaser from 'phaser';
 import config from '../Config/config';
-import blueButton2 from '../assets/ui/blue_button02.png';
 
 export default class CreditsScene extends Phaser.Scene {
   constructor() {
     super('Credits');
-  }
-
-  preload() {
   }
 
   create() {
@@ -33,7 +29,9 @@ export default class CreditsScene extends Phaser.Scene {
       duration: 3000,
       delay: 1000,
       onComplete: () => {
+        /* eslint-disable */
         this.destroy;
+        /* eslint-enable */
       },
     });
 
@@ -43,10 +41,12 @@ export default class CreditsScene extends Phaser.Scene {
       ease: 'Power1',
       duration: 8000,
       delay: 1000,
-      onComplete: function () {
+      onComplete: () => {
+        /* eslint-disable */
         this.madeByTween.destroy;
+        /* eslint-enable */
         this.scene.start('Title');
-      }.bind(this),
+      },
     });
   }
 }
