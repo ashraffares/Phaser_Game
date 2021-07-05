@@ -2,7 +2,9 @@ import Phaser from 'phaser';
 import Entity from './entity';
 
 export default class Player extends Entity {
+  /* eslint-disable */
   constructor(scene, x, y, key, type) {
+  /* eslint-enable */
     super(scene, x, y, key, 'Player');
     this.setData('speed', 200);
     this.play('sprPlayer');
