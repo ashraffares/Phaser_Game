@@ -1,55 +1,43 @@
+/* eslint-disable no-unused-expressions */
 import Phaser from 'phaser';
-import sprPlayer from '../assets/Shooter/sprPlayer.png';
-import Player from '../Entity/player';
+import laser from '../assets/laser.png';
+import ship from '../assets/ship.png';
+import LaserGroup from './LaserGroup';
 
 export default class GameScene extends Phaser.Scene {
   constructor() {
     super('Game');
+    this.ship;
+    this.laserGroup;
   }
 
   preload() {
-    // load images
-    this.load.spritesheet('sprPlayer', sprPlayer, {
-      frameWidth: 16,
-      frameHeight: 16,
-    });
+    this.load.image('laser', laser);
+    this.load.image('ship', ship);
   }
 
   create() {
-    this.player = new Player(
-      this,
-      this.game.config.width * 0.5,
-      this.game.config.height * 0.5,
-      'sprPlayer',
-    );
-
-    this.anims.create({
-      key: 'sprPlayer',
-      frames: this.anims.generateFrameNumbers('sprPlayer'),
-      frameRate: 20,
-      repeat: -1,
-    });
-
-    this.keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
-    this.keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
-    this.keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
-    this.keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
-    this.keySpace = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+    this.laserGroup = new LaserGroup(this);
+    this.addShip();
+    this.addEvent();
   }
 
-  update() {
-    this.player.update();
+  addEvent() {
+    this.input.on('pointermove', pointer => {
+      this.ship.x = pointer.x;
+    });
+    this.input.on('pointerdown', () => {
+      this.shootLaser();
+    });
+  }
 
-    if (this.keyW.isDown) {
-      this.player.moveUp();
-    } else if (this.keyS.isDown) {
-      this.player.moveDown();
-    }
+  shootLaser() {
+    this.laserGroup.fireLaser(this.ship.x, this.ship.y - 20);
+  }
 
-    if (this.keyA.isDown) {
-      this.player.moveLeft();
-    } else if (this.keyD.isDown) {
-      this.player.moveRight();
-    }
+  addShip() {
+    const centerX = this.cameras.main.width / 2;
+    const centerY = this.cameras.main.height - 90;
+    this.ship = this.add.image(centerX, centerY, 'ship');
   }
 }
