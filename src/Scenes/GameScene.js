@@ -5,8 +5,10 @@ import ship from '../assets/ship.png';
 import LaserGroup from './LaserGroup';
 import enamy from '../assets/enamy.png';
 import collectStars from '../assets/star.png';
+import explodAnimation from '../assets/sprExplosion.png';
 import laserSound from '../assets/sndLaser.wav';
 import explode from '../assets/sndExplode0.wav';
+import collectStarS from '../assets/collectStarS.wav';
 
 let score = 0;
 export default class GameScene extends Phaser.Scene {
@@ -19,13 +21,26 @@ export default class GameScene extends Phaser.Scene {
     this.load.image('laser', laser);
     this.load.image('ship', ship);
     this.load.image('stars', collectStars);
+    this.load.spritesheet('explodAnimation', explodAnimation, {
+      frameWidth: 32,
+      frameHeight: 32,
+    });
     this.load.audio('laserSound', [laserSound]);
     this.load.audio('explode', explode);
+    this.load.audio('collectStarS', collectStarS);
   }
 
   create() {
     this.laserS = this.sound.add('laserSound');
     this.explode = this.sound.add('explode');
+    this.collectStarSound = this.sound.add('collectStarS');
+    this.anims.create({
+      key: 'animsExp',
+      frames: this.anims.generateFrameNumbers('explodAnimation'),
+      frameRate: 20,
+      repeat: -1,
+    });
+
     this.laserGroup = new LaserGroup(this);
 
     this.enamy = this.physics.add.group({
@@ -70,6 +85,7 @@ export default class GameScene extends Phaser.Scene {
 
     this.physics.add.collider(this.mainShip, this.stars, (mainShip, stars) => {
       stars.disableBody(true, true);
+      this.collectStarSound.play();
       score += 5;
       this.scoreText.setText('Score: '.concat(score));
     });
