@@ -22,6 +22,18 @@ export default class GameScene extends Phaser.Scene {
   create() {
     this.laserGroup = new LaserGroup(this);
 
+    this.enamy = this.physics.add.group({
+      key: 'enamy',
+      repeat: 11,
+      setXY: {
+        x: 20, y: 0, stepX: 68,
+      },
+    });
+
+    this.enamy.children.iterate((child) => {
+      child.setVelocityY(300);
+    });
+
     this.stars = this.physics.add.group({
       key: 'stars',
       repeat: 11,
