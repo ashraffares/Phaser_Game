@@ -5,6 +5,7 @@ import ship from '../assets/ship.png';
 import LaserGroup from './LaserGroup';
 import enamy from '../assets/enamy.png';
 import collectStars from '../assets/star.png';
+import laserSound from '../assets/sndLaser.wav';
 
 let score = 0;
 export default class GameScene extends Phaser.Scene {
@@ -17,9 +18,11 @@ export default class GameScene extends Phaser.Scene {
     this.load.image('laser', laser);
     this.load.image('ship', ship);
     this.load.image('stars', collectStars);
+    this.load.audio('laserSound', [laserSound]);
   }
 
   create() {
+    this.laserS = this.sound.add('laserSound');
     this.laserGroup = new LaserGroup(this);
 
     this.enamy = this.physics.add.group({
@@ -84,6 +87,6 @@ export default class GameScene extends Phaser.Scene {
   }
 
   shootLaser() {
-    this.laserGroup.fireLaser(this.mainShip.x, this.mainShip.y - 20);
+    this.laserGroup.fireLaser(this.mainShip.x, this.mainShip.y - 20, this.laserS);
   }
 }
