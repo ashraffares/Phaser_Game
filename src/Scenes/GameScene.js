@@ -6,6 +6,7 @@ import LaserGroup from './LaserGroup';
 import enamy from '../assets/enamy.png';
 import collectStars from '../assets/star.png';
 import laserSound from '../assets/sndLaser.wav';
+import explode from '../assets/sndExplode0.wav';
 
 let score = 0;
 export default class GameScene extends Phaser.Scene {
@@ -19,10 +20,12 @@ export default class GameScene extends Phaser.Scene {
     this.load.image('ship', ship);
     this.load.image('stars', collectStars);
     this.load.audio('laserSound', [laserSound]);
+    this.load.audio('explode', explode);
   }
 
   create() {
     this.laserS = this.sound.add('laserSound');
+    this.explode = this.sound.add('explode');
     this.laserGroup = new LaserGroup(this);
 
     this.enamy = this.physics.add.group({
@@ -72,8 +75,8 @@ export default class GameScene extends Phaser.Scene {
     });
 
     this.physics.add.collider(this.mainShip, this.enamy, (mainship, enamy) => {
+      this.explode.play();
       enamy.disableBody(true, true);
-      // do explosion animation
       score -= 10;
     });
 
