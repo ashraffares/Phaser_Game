@@ -70,6 +70,12 @@ export default class GameScene extends Phaser.Scene {
       this.scoreText.setText('Score: '.concat(score));
     });
 
+    this.physics.add.collider(this.mainShip, this.enamy, (mainship ,enamy) => {
+      enamy.disableBody(true, true);
+      // do explosion animation
+      score -= 10;
+    });
+
     this.scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#fff' });
   }
 
