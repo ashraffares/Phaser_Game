@@ -4,8 +4,9 @@ import laser from '../assets/laser.png';
 import ship from '../assets/ship.png';
 import LaserGroup from './LaserGroup';
 import enamy from '../assets/enamy.png';
-import collectStars from '../assets/bomb.png';
+import collectStars from '../assets/star.png';
 
+let score = 0;
 export default class GameScene extends Phaser.Scene {
   constructor() {
     super('Game');
@@ -14,7 +15,7 @@ export default class GameScene extends Phaser.Scene {
   preload() {
     this.load.image('enamy', enamy);
     this.load.image('laser', laser);
-    this.load.spritesheet('ship', ship, { frameWidth: 125, frameHeight: 75 });
+    this.load.image('ship', ship);
     this.load.image('stars', collectStars);
   }
 
@@ -37,18 +38,27 @@ export default class GameScene extends Phaser.Scene {
 
     const centerX = this.cameras.main.width / 2;
     const centerY = this.cameras.main.height - 90;
-    this.mainShip = this.physics.add.sprite(centerX, centerY, 'ship');
+    this.mainShip = this.physics.add.image(centerX, centerY, 'ship');
 
-    this.cursors = this.input.keyboard.createCursorKeys();
     this.input.on('pointermove', pointer => {
-      this.mainShip.x = pointer.x;
       this.mainShip.y = pointer.y;
+      this.mainShip.x = pointer.x;
+      this.mainShip.setVelocityY(0);
     });
     this.input.on('pointerdown', () => {
       this.shootLaser();
     });
 
-    this.physics.add.collider(this.laserGroup, this.stars);
+    this.physics.add.collider(this.laserGroup, this.stars, (laserGroup, stars) => {
+      stars.disableBody(true, true);
+    });
+    this.physics.add.collider(this.mainShip, this.stars, (mainShip, stars) => {
+      stars.disableBody(true, true);
+      score += 10;
+      this.scoreText.setText('Score: '.concat(score));
+    });
+
+    this.scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#fff' });
   }
 
   shootLaser() {
