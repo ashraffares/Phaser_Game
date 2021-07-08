@@ -34,11 +34,13 @@ export default class GameScene extends Phaser.Scene {
     this.laserS = this.sound.add('laserSound');
     this.explode = this.sound.add('explode');
     this.collectStarSound = this.sound.add('collectStarS');
+
+    this.expAnim = this.add.sprite(0, 0, 'explodAnimation');
     this.anims.create({
-      key: 'animsExp',
+      key: 'expAnim',
       frames: this.anims.generateFrameNumbers('explodAnimation'),
       frameRate: 20,
-      repeat: -1,
+      repeat: 0,
     });
 
     this.laserGroup = new LaserGroup(this);
@@ -52,7 +54,7 @@ export default class GameScene extends Phaser.Scene {
     });
 
     this.enamy.children.iterate((child) => {
-      child.setVelocityY(100);
+      child.setVelocityY(50);
     });
 
     this.stars = this.physics.add.group({
@@ -88,17 +90,29 @@ export default class GameScene extends Phaser.Scene {
       this.collectStarSound.play();
       score += 5;
       this.scoreText.setText('Score: '.concat(score));
+      if (this.stars.countActive(true) === 0) {
+        this.stars.children.iterate(child => {
+          child.enableBody(true, child.x, 0, true, true);
+          child.setVelocityY(300);
+        });
+      }
     });
 
     this.physics.add.collider(this.mainShip, this.enamy, (mainship, enamy) => {
       this.explode.play();
       enamy.disableBody(true, true);
+      this.expAnim.x = enamy.x;
+      this.expAnim.y = enamy.y;
+      this.expAnim.play('expAnim');
       score -= 10;
     });
 
     this.physics.add.collider(this.laserGroup, this.enamy, (laserGroup, enamy) => {
       enamy.disableBody(true, true);
-      // do explosion animation
+      this.explode.play();
+      this.expAnim.x = enamy.x;
+      this.expAnim.y = enamy.y;
+      this.expAnim.play('expAnim');
       score += 20;
     });
 
