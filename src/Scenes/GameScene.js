@@ -31,7 +31,7 @@ export default class GameScene extends Phaser.Scene {
     });
 
     this.enamy.children.iterate((child) => {
-      child.setVelocityY(300);
+      child.setVelocityY(100);
     });
 
     this.stars = this.physics.add.group({
@@ -57,23 +57,27 @@ export default class GameScene extends Phaser.Scene {
       this.mainShip.x = pointer.x;
       this.mainShip.setVelocityY(0);
     });
+
     this.input.on('pointerdown', () => {
       this.shootLaser();
     });
 
-    this.physics.add.collider(this.laserGroup, this.stars, (laserGroup, stars) => {
-      stars.disableBody(true, true);
-    });
     this.physics.add.collider(this.mainShip, this.stars, (mainShip, stars) => {
       stars.disableBody(true, true);
-      score += 10;
+      score += 5;
       this.scoreText.setText('Score: '.concat(score));
     });
 
-    this.physics.add.collider(this.mainShip, this.enamy, (mainship ,enamy) => {
+    this.physics.add.collider(this.mainShip, this.enamy, (mainship, enamy) => {
       enamy.disableBody(true, true);
       // do explosion animation
       score -= 10;
+    });
+
+    this.physics.add.collider(this.laserGroup, this.enamy, (laserGroup, enamy) => {
+      enamy.disableBody(true, true);
+      // do explosion animation
+      score += 20;
     });
 
     this.scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#fff' });

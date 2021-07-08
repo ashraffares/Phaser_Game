@@ -9,7 +9,7 @@ export default {
   height: 600,
   physics: {
     default: 'arcade',
-    arcade: { debug: true },
+    arcade: { debug: false },
   },
   pixelArt: true,
   roundPixels: true,
