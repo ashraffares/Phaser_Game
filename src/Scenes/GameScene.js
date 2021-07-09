@@ -3,7 +3,7 @@ import Phaser from 'phaser';
 import laser from '../assets/laser.png';
 import ship from '../assets/ship.png';
 import LaserGroup from './LaserGroup';
-import enamy from '../assets/enamy.png';
+import enamy from '../assets/enamyEggS.png';
 import collectStars from '../assets/star.png';
 import explodAnimation from '../assets/sprExplosion.png';
 import laserSound from '../assets/sndLaser.wav';
@@ -11,6 +11,7 @@ import explode from '../assets/sndExplode0.wav';
 import collectStarS from '../assets/collectStarS.wav';
 
 let score = 0;
+let eggSpeed = 20;
 export default class GameScene extends Phaser.Scene {
   constructor() {
     super('Game');
@@ -54,7 +55,7 @@ export default class GameScene extends Phaser.Scene {
     });
 
     this.enamy.children.iterate((child) => {
-      child.setVelocityY(50);
+      child.setVelocityY(eggSpeed);
     });
 
     this.stars = this.physics.add.group({
@@ -93,7 +94,8 @@ export default class GameScene extends Phaser.Scene {
       if (this.stars.countActive(true) === 0) {
         this.stars.children.iterate(child => {
           child.enableBody(true, child.x, 0, true, true);
-          child.setVelocityY(300);
+          eggSpeed += 10;
+          child.setVelocityY(eggSpeed);
         });
       }
     });
@@ -105,6 +107,7 @@ export default class GameScene extends Phaser.Scene {
       this.expAnim.y = enamy.y;
       this.expAnim.play('expAnim');
       score -= 10;
+      this.addMoreEggs(score);
     });
 
     this.physics.add.collider(this.laserGroup, this.enamy, (laserGroup, enamy) => {
@@ -114,6 +117,7 @@ export default class GameScene extends Phaser.Scene {
       this.expAnim.y = enamy.y;
       this.expAnim.play('expAnim');
       score += 20;
+      this.addMoreEggs(score);
     });
 
     this.scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#fff' });
@@ -121,5 +125,14 @@ export default class GameScene extends Phaser.Scene {
 
   shootLaser() {
     this.laserGroup.fireLaser(this.mainShip.x, this.mainShip.y - 20, this.laserS);
+  }
+
+  addMoreEggs(eggSpeed) {
+    if (this.enamy.countActive(true) === 0) {
+      this.enamy.children.iterate(child => {
+        child.enableBody(true, child.x, 0, true, true);
+        child.setVelocityY(eggSpeed);
+      });
+    }
   }
 }
