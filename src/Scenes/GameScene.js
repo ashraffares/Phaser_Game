@@ -6,12 +6,13 @@ import LaserGroup from './LaserGroup';
 import enamy from '../assets/enamyEggS.png';
 import collectStars from '../assets/star.png';
 import explodAnimation from '../assets/sprExplosion.png';
+import enamy1 from '../assets/enamyEggF.png';
 import laserSound from '../assets/sndLaser.wav';
 import explode from '../assets/sndExplode0.wav';
 import collectStarS from '../assets/collectStarS.wav';
 
 let score = 0;
-let eggSpeed = 20;
+let eggSpeed = 10;
 export default class GameScene extends Phaser.Scene {
   constructor() {
     super('Game');
@@ -19,9 +20,13 @@ export default class GameScene extends Phaser.Scene {
 
   preload() {
     this.load.image('enamy', enamy);
+    this.load.image('enamy1', enamy1);
     this.load.image('laser', laser);
     this.load.image('ship', ship);
-    this.load.image('stars', collectStars);
+    this.load.spritesheet('stars', collectStars, {
+      frameWidth: 60,
+      frameHeight: 60,
+    });
     this.load.spritesheet('explodAnimation', explodAnimation, {
       frameWidth: 32,
       frameHeight: 32,
@@ -32,6 +37,13 @@ export default class GameScene extends Phaser.Scene {
   }
 
   create() {
+    this.enamy1 = this.physics.add.image(350, 0, 'enamy1');
+    this.enamy1.setCollideWorldBounds(true);
+    this.enamy1.setBounce(1, 1);
+
+    this.scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#fff' });
+    this.laserGroup = new LaserGroup(this);
+
     this.laserS = this.sound.add('laserSound');
     this.explode = this.sound.add('explode');
     this.collectStarSound = this.sound.add('collectStarS');
@@ -44,25 +56,25 @@ export default class GameScene extends Phaser.Scene {
       repeat: 0,
     });
 
-    this.laserGroup = new LaserGroup(this);
-
     this.enamy = this.physics.add.group({
       key: 'enamy',
-      repeat: 11,
+      repeat: 20,
       setXY: {
-        x: 20, y: 0, stepX: 68,
+        x: 20, y: 0, stepX: 35,
       },
     });
 
     this.enamy.children.iterate((child) => {
       child.setVelocityY(eggSpeed);
+      child.body.collideWorldBounds = true;
+      child.setBounceY(Phaser.Math.FloatBetween(0.4, 1));
     });
 
     this.stars = this.physics.add.group({
       key: 'stars',
       repeat: 11,
       setXY: {
-        x: 12, y: 0, stepX: 70, stepY: 5,
+        x: 12, y: 5, stepX: 70, stepY: 20,
       },
     });
 
@@ -89,50 +101,61 @@ export default class GameScene extends Phaser.Scene {
     this.physics.add.collider(this.mainShip, this.stars, (mainShip, stars) => {
       stars.disableBody(true, true);
       this.collectStarSound.play();
+      this.addMoreStars();
       score += 5;
-      this.scoreText.setText('Score: '.concat(score));
-      if (this.stars.countActive(true) === 0) {
-        this.stars.children.iterate(child => {
-          child.enableBody(true, child.x, 0, true, true);
-          eggSpeed += 10;
-          child.setVelocityY(eggSpeed);
-        });
-      }
+      this.resetScore();
     });
 
     this.physics.add.collider(this.mainShip, this.enamy, (mainship, enamy) => {
-      this.explode.play();
+      this.PlayExplodeAnim(enamy);
       enamy.disableBody(true, true);
-      this.expAnim.x = enamy.x;
-      this.expAnim.y = enamy.y;
-      this.expAnim.play('expAnim');
-      score -= 10;
-      this.addMoreEggs(score);
+      score -= 25;
+      this.resetScore();
     });
 
     this.physics.add.collider(this.laserGroup, this.enamy, (laserGroup, enamy) => {
       enamy.disableBody(true, true);
-      this.explode.play();
-      this.expAnim.x = enamy.x;
-      this.expAnim.y = enamy.y;
-      this.expAnim.play('expAnim');
-      score += 20;
-      this.addMoreEggs(score);
+      this.PlayExplodeAnim(enamy);
+      score += 5;
+      this.resetScore();
     });
+  }
 
-    this.scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#fff' });
+  update() {
+    this.addMoreEggs();
   }
 
   shootLaser() {
     this.laserGroup.fireLaser(this.mainShip.x, this.mainShip.y - 20, this.laserS);
   }
 
-  addMoreEggs(eggSpeed) {
+  PlayExplodeAnim(enamy) {
+    this.explode.play();
+    this.expAnim.x = enamy.x;
+    this.expAnim.y = enamy.y;
+    this.expAnim.play('expAnim');
+  }
+
+  addMoreEggs() {
     if (this.enamy.countActive(true) === 0) {
       this.enamy.children.iterate(child => {
         child.enableBody(true, child.x, 0, true, true);
+        eggSpeed += 3;
         child.setVelocityY(eggSpeed);
       });
     }
+  }
+
+  addMoreStars() {
+    if (this.stars.countActive(true) === 0) {
+      this.stars.children.iterate(child => {
+        child.enableBody(true, child.x, 0, true, true);
+        child.setVelocityY(900);
+      });
+    }
+  }
+
+  resetScore() {
+    this.scoreText.setText('Score: '.concat(score));
   }
 }
