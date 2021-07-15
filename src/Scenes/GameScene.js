@@ -11,7 +11,7 @@ import laserSound from '../assets/sndLaser.wav';
 import explode from '../assets/sndExplode0.wav';
 import collectStarS from '../assets/collectStarS.wav';
 
-let score = 0;
+let score = 5;
 let eggSpeed = 10;
 export default class GameScene extends Phaser.Scene {
   constructor() {
@@ -119,10 +119,31 @@ export default class GameScene extends Phaser.Scene {
       score += 5;
       this.resetScore();
     });
+
+    this.physics.add.collider(this.enamy1, this.mainShip, () => {
+      score -= 5;
+      this.resetScore();
+    });
   }
 
   update() {
     this.addMoreEggs();
+    this.followShip();
+    if (score <= 0) {
+      this.physics.pause();
+      this.mainShip.disableBody(true, true);
+      this.gameOver = true;
+      this.scene.start('GameOver');
+    }
+  }
+
+  followShip() {
+    // eslint-disable-next-line max-len
+    this.rotation = Phaser.Math.Angle.Between(this.enamy1.x, this.enamy1.y, this.mainShip.x, this.mainShip.y);
+    this.enamy1.body.setVelocity(
+      Math.cos(this.rotation) * 50,
+      Math.sin(this.rotation) * 50,
+    );
   }
 
   shootLaser() {
