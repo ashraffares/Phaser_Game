@@ -10,8 +10,11 @@ import enamy1 from '../assets/enamyEggF.png';
 import laserSound from '../assets/sndLaser.wav';
 import explode from '../assets/sndExplode0.wav';
 import collectStarS from '../assets/collectStarS.wav';
+import { postScores } from '../scoreBoard/api';
+import { getNameHandler } from '../localStorage/localStorage';
 
-let score = 5;
+let heighScore = 0;
+let score = 100;
 let eggSpeed = 10;
 export default class GameScene extends Phaser.Scene {
   constructor() {
@@ -107,6 +110,7 @@ export default class GameScene extends Phaser.Scene {
       this.collectStarSound.play();
       this.addMoreStars();
       score += 5;
+      heighScore += score;
       this.resetScore();
     });
 
@@ -121,6 +125,7 @@ export default class GameScene extends Phaser.Scene {
       enamy.disableBody(true, true);
       this.PlayExplodeAnim(enamy);
       score += 5;
+      heighScore += score;
       this.resetScore();
     });
 
@@ -142,6 +147,8 @@ export default class GameScene extends Phaser.Scene {
       this.physics.pause();
       this.mainShip.disableBody(true, true);
       this.gameOver = true;
+      const name = getNameHandler();
+      postScores(heighScore, name);
       this.scene.start('GameOver');
     }
   }
