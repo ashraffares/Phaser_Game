@@ -11,6 +11,9 @@ export default {
     default: 'arcade',
     arcade: { debug: false },
   },
+  dom: {
+    createContainer: true,
+  },
   pixelArt: true,
   roundPixels: true,
 };
