@@ -5,12 +5,16 @@ export default class Laser extends Phaser.Physics.Arcade.Sprite {
     super(scene, x, y, 'laser');
   }
 
-  fire(x, y, laserS) {
+  fire(x, y, laserS, shipKind) {
     laserS.play();
     this.body.reset(x, y);
     this.setActive(true);
     this.setVisible(true);
-    this.setVelocityY(-900);
+    if (shipKind === 'enamy') {
+      this.setVelocityY(900);
+    } else {
+      this.setVelocityY(-900);
+    }
   }
 
   preUpdate(time, delta) {

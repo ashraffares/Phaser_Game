@@ -41,6 +41,10 @@ export default class GameScene extends Phaser.Scene {
     this.enamy1.setCollideWorldBounds(true);
     this.enamy1.setBounce(1, 1);
 
+    setInterval(() => {
+      this.shootLaserEnamy(this.enamy1.x, this.enamy1.y);
+    }, 1000);
+
     this.scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#fff' });
     this.laserGroup = new LaserGroup(this);
 
@@ -147,7 +151,11 @@ export default class GameScene extends Phaser.Scene {
   }
 
   shootLaser() {
-    this.laserGroup.fireLaser(this.mainShip.x, this.mainShip.y - 20, this.laserS);
+    this.laserGroup.fireLaser(this.mainShip.x, this.mainShip.y - 20, this.laserS, 'mainShip');
+  }
+
+  shootLaserEnamy(x, y) {
+    this.laserGroup.fireLaser(x, y - 20, this.laserS, 'enamy');
   }
 
   PlayExplodeAnim(enamy) {

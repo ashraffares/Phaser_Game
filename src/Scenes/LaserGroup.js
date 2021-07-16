@@ -14,10 +14,10 @@ export default class LaserGroup extends Phaser.Physics.Arcade.Group {
     });
   }
 
-  fireLaser(x, y, laserS) {
+  fireLaser(x, y, laserS, shipKind) {
     const laser = this.getFirstDead(false);
     if (laser) {
-      laser.fire(x, y, laserS);
+      laser.fire(x, y, laserS, shipKind);
     }
   }
 }
