@@ -128,6 +128,11 @@ export default class GameScene extends Phaser.Scene {
       score -= 5;
       this.resetScore();
     });
+
+    this.physics.add.collider(this.laserGroup, this.mainShip, () => {
+      score -= 20;
+      this.resetScore();
+    });
   }
 
   update() {
