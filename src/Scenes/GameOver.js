@@ -1,6 +1,8 @@
 import Phaser from 'phaser';
 import { getScores } from '../scoreBoard/api';
 import { sortedScores } from '../scoreBoard/heighScore';
+import exitBtn from '../assets/exitbtn.png';
+import restartBtn from '../assets/restartbtn.png';
 
 export default class SceneGameOver extends Phaser.Scene {
   constructor() {
@@ -9,6 +11,8 @@ export default class SceneGameOver extends Phaser.Scene {
 
   preload() {
     this.score = getScores();
+    this.load.image('exitBtn', exitBtn);
+    this.load.image('restartBtn', restartBtn);
   }
 
   create() {

@@ -14,7 +14,7 @@ import { postScores } from '../scoreBoard/api';
 import { getNameHandler } from '../localStorage/localStorage';
 
 let heighScore = 0;
-let score = 100;
+let score = 500;
 let eggSpeed = 10;
 export default class GameScene extends Phaser.Scene {
   constructor() {
