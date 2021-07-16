@@ -1,6 +1,6 @@
 import Phaser from 'phaser';
 import config from '../Config/config';
-import { saveHandler } from '../localStorage/localStorage';
+import saveHandler from '../localStorage/saveHandler';
 import btn1 from '../assets/ui/blue_button02.png';
 
 export default class userInputs extends Phaser.Scene {

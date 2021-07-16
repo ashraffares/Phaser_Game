@@ -11,7 +11,7 @@ import laserSound from '../assets/sndLaser.wav';
 import explode from '../assets/sndExplode0.wav';
 import collectStarS from '../assets/collectStarS.wav';
 import { postScores } from '../scoreBoard/api';
-import { getNameHandler } from '../localStorage/localStorage';
+import getNameHandler from '../localStorage/getNameHandler';
 
 let heighScore = 0;
 let score = 500;
