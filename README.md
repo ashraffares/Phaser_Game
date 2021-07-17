@@ -45,7 +45,7 @@
 
 - Navigate and shoot at the alien ships, stay away from alien ships and stray bullets, when you hit an alien ship, it gets destroyed and the higher your score the more aliens attack you.
 
-- Use Arrow keys or a,s,d,w to move up, down, left, and right and spacebar to shot
+- Use mouse to move in every direction and shoot with right click.
 
 - <img src="./src/assets/ship.png" width="20">
 
