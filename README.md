@@ -1,49 +1,85 @@
-# Phaser 3 Webpack Project Template
+<h1 align="center">  Alien Shooter </h1>
 
-A Phaser 3 project template with ES6 support via [Babel 7](https://babeljs.io/) and [Webpack 4](https://webpack.js.org/) that includes hot-reloading for development and production-ready builds.
+### A Space shooter game, the Player navigates around, shot and destroy eggs while staying away from the big egg.
 
-This has been updated for Phaser 3.50.0 version and above.
+![127 0 0 1_5500_d (2)](https://user-images.githubusercontent.com/37639594/126034017-8e5d1ae1-3a87-4bf1-b50f-12f19d69476a.png)
+![127 0 0 1_5500_d (1)](https://user-images.githubusercontent.com/37639594/126034018-feee65f4-000c-461d-a389-c18bd65f05a0.png)
+![127 0 0 1_5500_d](https://user-images.githubusercontent.com/37639594/126034019-518fdb9a-fed0-4f2c-b811-e35e7da506d1.png)
 
-Loading images via JavaScript module `import` is also supported, although not recommended.
+# Built With
 
-## Requirements
+- Phaser 3
+- Webpack
+- Javascript
+- HTML/CSS
 
-[Node.js](https://nodejs.org) is required to install dependencies and run scripts via `npm`.
+## Live Demo
 
-## Available Commands
+[live demo](http://faresashraf.me/Phaser_Game/)
 
-| Command | Description |
-|---------|-------------|
-| `npm install` | Install project dependencies |
-| `npm start` | Build project and open web server running project |
-| `npm run build` | Builds code bundle with production settings (minification, uglification, etc..) |
+# Getting Started
 
-## Writing Code
+### clone repository into your computer by running in terminal
 
-After cloning the repo, run `npm install` from your project directory. Then, you can start the local development server by running `npm start`.
+- `git clone https://github.com/ashraffares/Phaser_Game.git`
 
-After starting the development server with `npm start`, you can edit any files in the `src` folder and webpack will automatically recompile and reload your server (available at `http://localhost:8080` by default).
+- `cd JScapestone`
 
-## Customizing the Template
+* Install project dependencies
 
-### Babel
+- `npm run install`
 
-You can write modern ES6+ JavaScript and Babel will transpile it to a version of JavaScript that you want your project to support. The targeted browsers are set in the `.babelrc` file and the default currently targets all browsers with total usage over "0.25%" but excludes IE11 and Opera Mini.
+* Run project
 
- ```
-"browsers": [
-  ">0.25%",
-  "not ie 11",
-  "not op_mini all"
-]
- ```
+- `npm run start`
 
-### Webpack
+* Run test suites
 
-If you want to customize your build, such as adding a new webpack loader or plugin (i.e. for loading CSS or fonts), you can modify the `webpack/base.js` file for cross-project changes, or you can modify and/or create new configuration files and target them in specific npm tasks inside of `package.json'.
+- `npm run test`
 
-## Deploying Code
+* Builds code bundle with production settings
 
-After you run the `npm run build` command, your code will be built into a single bundle located at `dist/bundle.min.js` along with any other assets you project depended. 
+- `npm run build`
 
-If you put the contents of the `dist` folder in a publicly-accessible location (say something like `http://mycoolserver.com`), you should be able to open `http://mycoolserver.com/index.html` and play your game.
+**Game Design**
+
+- Navigate and shoot at the alien ships, stay away from alien ships and stray bullets, when you hit an alien ship, it gets destroyed and the higher your score the more aliens attack you.
+
+- Use Arrow keys or a,s,d,w to move up, down, left, and right and spacebar to shot
+
+- <img src="./src/assets/ship.png" width="20">
+
+> #### Player main ship, destroy eggs as many as you can, collecting points.
+
+- <img src="./src/assets/ship.png" width="20">
+
+> #### An Egg, moving down to hit the main ship and destroy it.
+
+- <img src="./src/assets/enamyEggS.png" width="20">
+
+> #### Player bullet. destroys any egg it touches.
+
+- <img src="./src/assets/laser.png" width="10">
+
+> #### Enamy egg follow the main ship and try to destroy it.
+
+- <img src="./src/assets/enamyEggF.png" width="30">
+
+> #### Alien bullet, Bullets falling from alien ships. aiming at destroying the player ship.
+
+# Author
+
+👤 **Fares Ashraf**
+
+[![](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/ashraffares) [![](https://img.shields.io/badge/Twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white)](https://twitter.com/Fares09301164) [![](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/faresashraf/)
+
+
+## 🤝 Contributing
+
+Contributions, issues and feature requests are welcome!
+
+Feel free to check the [issues page](https://github.com/juxsalley/alien-shooter/issues).
+
+## Show your support
+
+Give a ⭐️ if you like this project
