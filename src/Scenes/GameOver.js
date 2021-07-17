@@ -1,8 +1,7 @@
 import Phaser from 'phaser';
 import { getScores } from '../scoreBoard/api';
 import { sortedScores } from '../scoreBoard/heighScore';
-import exitBtn from '../assets/exitbtn.png';
-import restartBtn from '../assets/restartbtn.png';
+import btn1 from '../assets/ui/blue_button02.png';
 
 export default class SceneGameOver extends Phaser.Scene {
   constructor() {
@@ -11,8 +10,7 @@ export default class SceneGameOver extends Phaser.Scene {
 
   preload() {
     this.score = getScores();
-    this.load.image('exitBtn', exitBtn);
-    this.load.image('restartBtn', restartBtn);
+    this.load.image('btn1', btn1);
   }
 
   create() {
@@ -66,28 +64,18 @@ export default class SceneGameOver extends Phaser.Scene {
     );
     this.title.setOrigin(0.5);
 
-    this.exitBtn = this.add.image(
-      this.game.config.width * 0.5,
-      this.game.config.height * 0.4,
-      'exitBtn',
-    );
     this.restartBtn = this.add.image(
       this.game.config.width * 0.5,
       this.game.config.height * 0.5,
-      'restartBtn',
+      'btn1',
     );
+    this.textRestart = this.add.text(370, 280, 'Restart', { fontSize: '32px', fill: '#fff' });
     this.restartBtn.setInteractive();
 
     this.restartBtn.on('pointerdown', () => {
       this.scene.start('SceneMain');
       // eslint-disable-next-line no-restricted-globals
       location.reload();
-    });
-
-    this.exitBtn.setInteractive();
-    this.exitBtn.on('pointerdown', () => {
-      this.scene.stop();
-      window.close();
     });
   }
 }

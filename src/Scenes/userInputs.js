@@ -24,6 +24,7 @@ export default class userInputs extends Phaser.Scene {
       .createFromHTML(formHml);
     this.form.setPerspective(800);
     this.start = this.add.image(config.width * 0.5, config.height * 0.5, 'btn1');
+    this.text = this.add.text(360, 275, 'Play', { fontSize: '32px', fill: '#fff' });
     this.start.displayWidth = 100;
     this.start.displayHeight = 80;
 
