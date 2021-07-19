@@ -1,6 +1,5 @@
 import Phaser from 'phaser';
-import { getScores } from '../scoreBoard/api';
-import { sortedScores } from '../scoreBoard/heighScore';
+import { getScores, sortedScores } from '../scoreBoard/api';
 import btn1 from '../assets/ui/blue_button02.png';
 
 export default class SceneGameOver extends Phaser.Scene {

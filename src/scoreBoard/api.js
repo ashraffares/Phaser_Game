@@ -1,5 +1,18 @@
-// eslint-disable-next-line import/no-cycle
-import { hiScores } from './heighScore';
+import _ from 'lodash';
+
+const hiScores = (scores) => {
+  if (scores.length !== 0) {
+    localStorage.setItem('scores', JSON.stringify(scores));
+
+    let newScores = localStorage.getItem('scores');
+    newScores = JSON.parse(newScores);
+
+    if (newScores.length > 0) {
+      return newScores;
+    }
+  }
+  return false;
+};
 
 const api = 'https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/fELVs0GVO25geawXGIjZ/scores';
 const getScores = () => {
@@ -36,4 +49,15 @@ const postScores = (score, playerName) => {
   }
 };
 
-export { getScores, postScores };
+const sortedScores = () => {
+  getScores();
+  let newScores = localStorage.getItem('scores');
+  newScores = JSON.parse(newScores);
+  newScores = _.sortBy(newScores, ['score']);
+
+  return newScores || '';
+};
+
+export {
+  getScores, postScores, hiScores, sortedScores,
+};
