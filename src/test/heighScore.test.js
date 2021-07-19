@@ -1,4 +1,4 @@
-import { hiScores, sortedScores } from '../heighScore';
+import { hiScores, sortedScores } from '../scoreBoard/heighScore';
 
 beforeAll(() => {
   localStorage.setItem(

@@ -1,4 +1,4 @@
-import getNameHandler from '../getNameHandler';
+import getNameHandler from '../localStorage/getNameHandler';
 
 beforeAll(() => {
   localStorage.setItem('name', JSON.stringify('salley'));
