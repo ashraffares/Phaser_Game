@@ -16,8 +16,7 @@ export default class SceneGameOver extends Phaser.Scene {
   create() {
     setTimeout(() => {
       this.scene.start('Title');
-      // eslint-disable-next-line no-restricted-globals
-      location.reload();
+      window.location.reload();
     }, 20000);
     this.add.text(
       this.game.config.width * 0.4,
@@ -74,8 +73,7 @@ export default class SceneGameOver extends Phaser.Scene {
 
     this.restartBtn.on('pointerdown', () => {
       this.scene.start('SceneMain');
-      // eslint-disable-next-line no-restricted-globals
-      location.reload();
+      window.location.reload();
     });
   }
 }

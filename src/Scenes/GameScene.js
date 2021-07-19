@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-expressions */
 import Phaser from 'phaser';
 import laser from '../assets/laser.png';
 import ship from '../assets/ship.png';
@@ -154,8 +153,9 @@ export default class GameScene extends Phaser.Scene {
   }
 
   followShip() {
-    // eslint-disable-next-line max-len
-    this.rotation = Phaser.Math.Angle.Between(this.enamy1.x, this.enamy1.y, this.mainShip.x, this.mainShip.y);
+    this.mx = this.mainShip.x;
+    this.my = this.mainShip.y;
+    this.rotation = Phaser.Math.Angle.Between(this.enamy1.x, this.enamy1.y, this.mx, this.my);
     this.enamy1.body.setVelocity(
       Math.cos(this.rotation) * 50,
       Math.sin(this.rotation) * 50,
