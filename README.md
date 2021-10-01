@@ -1,72 +1,85 @@
-# JavaScript
+<h1 align="center">  Alien Shooter </h1>
 
-If you are not familiar with linters and GitHub Actions, read [root level README](../README.md).
+### A Space shooter game, the Player navigates around, shot and destroy eggs while staying away from the big egg.
 
-## Set-up GitHub Actions
+![127 0 0 1_5500_d (2)](https://user-images.githubusercontent.com/37639594/126034017-8e5d1ae1-3a87-4bf1-b50f-12f19d69476a.png)
+![127 0 0 1_5500_d (1)](https://user-images.githubusercontent.com/37639594/126034018-feee65f4-000c-461d-a389-c18bd65f05a0.png)
+![127 0 0 1_5500_d](https://user-images.githubusercontent.com/37639594/126034019-518fdb9a-fed0-4f2c-b811-e35e7da506d1.png)
 
-This GitHub Action is going to run [ESLint](https://eslint.org/) and [Stylelint](https://stylelint.io/) to help you find style issues.
+# Built With
 
-[Stylelint](https://stylelint.io/) is a linter for your stylesheets that helps you avoid errors and enforce conventions.
+- Phaser 3
+- Webpack
+- Javascript
+- HTML/CSS
 
-[ESLint](https://eslint.org/) is a tool for identifying and reporting on patterns found in ECMAScript/JavaScript code, with the goal of making code more consistent and avoiding bugs.
+## Live Demo
 
-Please do the following **steps in this order**:
+[live demo](http://faresashraf.me/Phaser_Game/)
 
-1. In the first commit of your feature branch create a `.github/workflows` folder and add a copy of [`.github/workflows/linters.yml`](.github/workflows/linters.yml) to that folder.
-    - **Remember** to use the file linked above
-    - **Remember** that `.github` folder starts with a dot.
-2. **Do not make any changes in config files - they represent style guidelines that you share with your team - which is a group of all Microverse students.**
-    - If you think that change is necessary - open a [Pull Request in this repository](../README.md#contributing) and let your code reviewer know about it.
-3. When you open your first pull request you should see the result of the GitHub Actions:
+# Getting Started
 
-![gh actions checks](../assets/images/gh-actions-eslint-stylelint-checks.png)
+### clone repository into your computer by running in terminal
 
-Click on the `Details` link to see the full output and the errors that need to be fixed:
+- `git clone https://github.com/ashraffares/Phaser_Game.git`
 
-![gh actions failing checks](../assets/images/gh-actions-html-css-failing-checks.png)
+- `cd JScapestone`
 
-## Set-up linters in your local env
+* Install project dependencies
 
-**Note**: The `npm` package manager is going to create a `node_modules` directory to install all of your dependencies. You shouldn't commit that directory. To avoid that, you can create a [`.gitignore`](https://git-scm.com/docs/gitignore) file and add `node_modules` to it:
+- `npm run install`
 
-```
-# .gitignore
-node_modules/
-```
+* Run project
 
-### ESLint
+- `npm run start`
 
-1. Run `npm install --save-dev eslint@6.8.x eslint-config-airbnb-base@14.1.x eslint-plugin-import@2.20.x babel-eslint@10.1.x` (not sure how to use npm? Read [this](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)).
-2. Copy [.eslintrc.json](./.eslintrc.json) to the root directory of your project.
-3. **Do not make any changes in config files - they represent style guidelines that you share with your team - which is a group of all Microverse students.**
-    - If you think that change is necessary - open a [Pull Request in this repository](../README.md#contributing) and let your code reviewer know about it.
-4. Run `npx eslint .` on the root of your directory of your project.
-5. Fix linter errors.
-6. **IMPORTANT NOTE**: feel free to research [auto-correct options for Stylelint](https://stylelint.io/user-guide/cli#autofixing-errors) if you get a flood of errors but keep in mind that correcting style errors manually will help you to make a habit of writing a clean code!
+* Run test suites
 
-### Stylelint
+- `npm run test`
 
-1. Run
+* Builds code bundle with production settings
 
-   ```
-   npm install --save-dev stylelint@13.3.x stylelint-scss@3.17.x stylelint-config-standard@20.0.x stylelint-csstree-validator
-   ```
+- `npm run build`
 
-   (not sure how to use npm? Read [this](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)).
+**Game Design**
 
-2. Copy [.stylelintrc.json](./.stylelintrc.json) to the root directory of your project.
-3. **Do not make any changes in config files - they represent style guidelines that you share with your team - which is a group of all Microverse students.**
-   - If you think that change is necessary - open a [Pull Request in this repository](../README.md#contributing) and let your code reviewer know about it.
-4. Run
-   ```
-   npx stylelint "**/*.{css,scss}"
-   ```
-   on the root of your directory of your project.
-5. Fix linter errors.
-6. **IMPORTANT NOTE**: feel free to research [auto-correct options for Stylelint](https://stylelint.io/user-guide/cli#autofixing-errors) if you get a flood of errors but keep in mind that correcting style errors manually will help you to make a habit of writing a clean code!
+- Navigate and shoot at the alien ships, stay away from alien ships and stray bullets, when you hit an alien ship, it gets destroyed and the higher your score the more aliens attack you.
 
-## Test/Deployment Actions
+- Use mouse to move in every direction and shoot with right click.
 
-Feel free to add your own deployment actions which can run your tests and deploy to Heroku.
+- <img src="./src/assets/ship.png" width="20">
 
-Make sure that you do not modify the [`.github/workflows/linters.yml`](.github/workflows/linters.yml) but that you create a separe GitHub Action workflow file for that.
+> #### Player main ship, destroy eggs as many as you can, collecting points.
+
+- <img src="./src/assets/ship.png" width="20">
+
+> #### An Egg, moving down to hit the main ship and destroy it.
+
+- <img src="./src/assets/enamyEggS.png" width="20">
+
+> #### Player bullet. destroys any egg it touches.
+
+- <img src="./src/assets/laser.png" width="10">
+
+> #### Enamy egg follow the main ship and try to destroy it.
+
+- <img src="./src/assets/enamyEggF.png" width="30">
+
+> #### Alien bullet, Bullets falling from alien ships. aiming at destroying the player ship.
+
+# Author
+
+👤 **Fares Ashraf**
+
+[![](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/ashraffares) [![](https://img.shields.io/badge/Twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white)](https://twitter.com/Fares09301164) [![](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/faresashraf/)
+
+
+## 🤝 Contributing
+
+Contributions, issues and feature requests are welcome!
+
+Feel free to check the [issues page](https://github.com/ashraffares/Phaser_Game/issues).
+
+## Show your support
+
+Give a ⭐️ if you like this project
